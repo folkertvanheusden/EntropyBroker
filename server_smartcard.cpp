@@ -239,7 +239,7 @@ int main(int argc, char *argv[])
 				error_exit("Got data but also an ISO 7816 error code: %04x", code);
 		}
 
-		int n_to_add = std::min(sizeof bytes - index, 8lu);
+		int n_to_add = std::min(sizeof bytes - index, (size_t)8);
 		memcpy(&bytes[index], pbRecvBuffer, n_to_add);
 		index += n_to_add;
 
