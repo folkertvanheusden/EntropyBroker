@@ -161,22 +161,30 @@ void set_serial_parameters(int fd, char *pars_in)
 		case 2000000:
 			bps = B2000000;
 			break;
-
+  /* not all of these constants are available on all architectures */
+  #ifdef B2500000
 		case 2500000:
 			bps = B2500000;
 			break;
+  #endif
 
+  #ifdef B3000000
 		case 3000000:
 			bps = B3000000;
 			break;
+  #endif
 
+  #ifdef B3500000
 		case 3500000:
 			bps = B3500000;
 			break;
+  #endif
 
+  #ifdef B4000000
 		case 4000000:
 			bps = B4000000;
 			break;
+  #endif
 #endif
 		default:
 			error_exit("baudrate %s is not understood", pars[0]);
