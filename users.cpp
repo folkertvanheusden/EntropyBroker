@@ -84,7 +84,7 @@ void users::load_usermap()
 
 		std::vector<std::string> pars = split_string(line, "|");
 		if (pars.size() == 1)
-			error_exit("%s: seperator missing at line %d (%s)", filename.c_str(), line_nr, line.c_str());
+			error_exit("%s: separator missing at line %d (%s)", filename.c_str(), line_nr, line.c_str());
 
 		user_t u;
 		u.password = pars[1];
@@ -127,7 +127,7 @@ user_t *users::find_user(std::string username)
 
 bool users::get_password(std::string username, std::string & password)
 {
-	password.assign("DEFINATELY WRONG  PASSWORd");
+	password.assign("DEFINITELY WRONG  PASSWORd");
 
 	list_rlock();
 

@@ -333,7 +333,7 @@ Håvard Moen:
 
 License
 -------
-GPL2
+AGPL-3
 
 
 Contact info

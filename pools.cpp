@@ -590,7 +590,7 @@ int pools::get_bits_from_pools(int n_bits_requested, unsigned char **buffer, boo
 		// random, it is only used to "spread the load" over all the pools
 		for(unsigned int loop_index=0; loop_index<n && n_to_do_bits > 0; loop_index++)
 		{
-			int index = abs(loop_index + index_offset) % n;
+			int index = abs((int)(loop_index + index_offset)) % n;
 
 			double time_left = calc_time_left(start_ts, loop_index, n, max_duration);
 
