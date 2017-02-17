@@ -135,6 +135,11 @@ int READ_TO(int fd, char *whereto, size_t len, double to, bool *do_exit)
 			return 0;
 		}
 
+		if (fds[0].revents & (POLLERR|POLLHUP|POLLNVAL))
+		{
+			return -1;
+		}
+
 		if (fds[0].revents & POLLIN)
 		{
 			rc = read(fd, whereto, len);
