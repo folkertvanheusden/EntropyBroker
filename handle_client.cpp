@@ -698,23 +698,35 @@ void main_loop(std::vector<client_t *> *clients, pthread_mutex_t *clients_mutex,
 			// this way we go through each fd in the process_pipe_from_client_thread part
 			// so that we detect closed fds
 			int set = 0;
+			int failed = 0;
 			for(unsigned int i=0; i<fds.size(); i++) {
-				if(fds.at(i).fd == clients -> at(loop) -> to_main[0] && fds.at(i).revents & POLLIN) {
-					set = 1;
-					break;
+				if(fds.at(i).fd == clients -> at(loop) -> to_main[0])
+				{
+					if(fds.at(i).revents & POLLIN)
+					{
+						set = 1;
+						break;
+					}
+					if(fds.at(i).revents & (POLLERR|POLLHUP|POLLNVAL))
+					{
+						failed = 1;
+						break;
+					}
 				};
 			};
 			if(rc > 0 && set == 1 ) {
 
 				if (process_pipe_from_client_thread(clients -> at(loop), &msgs_clients, &msgs_servers) == -1)
-				{
-					dolog(LOG_INFO, "main|connection with %s/%s lost", clients -> at(loop) -> host.c_str(), clients -> at(loop) -> type.c_str());
+					failed = 1;
+			}
+			if(rc > 0 && failed == 1 ) {
 
-					user_map -> inc_misc_errors(clients -> at(loop) -> username);
-					gs -> inc_misc_errors();
+				dolog(LOG_INFO, "main|connection with %s/%s lost", clients -> at(loop) -> host.c_str(), clients -> at(loop) -> type.c_str());
 
-					delete_ids.push_back(&clients -> at(loop) -> th);
-				}
+				user_map -> inc_misc_errors(clients -> at(loop) -> username);
+				gs -> inc_misc_errors();
+
+				delete_ids.push_back(&clients -> at(loop) -> th);
 			}
 		}
 
