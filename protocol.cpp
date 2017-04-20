@@ -215,7 +215,7 @@ reconnect_status_t protocol::reconnect_server_socket(bool *do_exit)
 
 		stream_cipher = encrypt_stream::select_cipher(cipher_data);
 
-		unsigned char ivec[8] = { 0 };
+		unsigned char ivec[stream_cipher -> get_ivec_size()] = { 0 };
 		calc_ivec(password.c_str(), challenge, 0, stream_cipher -> get_ivec_size(), ivec);
 #ifdef CRYPTO_DEBUG
 		printf("IVEC: "); hexdump(ivec, 8);
