@@ -183,9 +183,8 @@ clean:
 
 distclean: clean
 	rm -f makefile.inc
-
 package:
-	svn update
+
 	mkdir eb-$(VERSION) eb-$(VERSION)/ComScire_R2000KU
 	cp eb.spec version configure *.cpp *.h entropy_broker.conf Makefile bin_to_values.pl do_fft.sh auth.txt network_protocol.txt users.txt readme.txt design.txt interfacing.txt license.* eb-$(VERSION)
 	cp ComScire_R2000KU/*.[ch]pp ComScire_R2000KU/LICENSE eb-$(VERSION)/ComScire_R2000KU

@@ -59,17 +59,27 @@ int kernel_rng_add_entropy(unsigned char *data, int n, int n_bits)
 	return 0;
 }
 
+int get_file_value(const char *const file)
+{
+        FILE *fh = fopen(file, "r");
+        if (!fh)
+                error_exit("Failed to open %s", file);
+
+        int value = -1;
+        if (fscanf(fh, "%d", &value) != 1)
+                error_exit("Failed to read from %s", file);
+
+        fclose(fh);
+
+        return value;
+}
+
 int kernel_rng_get_max_entropy_count(void)
 {
-	int bit_count;
-	FILE *fh = fopen(PROC_POOLSIZE, "r");
-	if (!fh)
-		error_exit("Failed to open %s", PROC_POOLSIZE);
+        return get_file_value(PROC_POOLSIZE);
+}
 
-	if (fscanf(fh, "%d", &bit_count) != 1)
-		error_exit("Failed to read from %s", PROC_POOLSIZE);
-
-	fclose(fh);
-
-	return bit_count;
+int kernel_rng_get_write_threshold(void)
+{
+        return get_file_value(PROC_WRITE_TH);
 }

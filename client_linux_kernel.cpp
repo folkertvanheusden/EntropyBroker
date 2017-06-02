@@ -50,7 +50,7 @@ void help(void)
 	printf("-l file   log to file 'file'\n");
 	printf("-L x      log level, 0=nothing, 255=all\n");
 	printf("-s        log to syslog\n");
-	printf("-b x      interval in which data will be seeded in a full(!) kernel entropy buffer (default is off)\n");
+	printf("-b x      interval in which data will check the entropy-level. in seconds. 0.1 is every 100ms.\n");
 	printf("-n        do not fork\n");
 	printf("-P file   write pid to file\n");
 	printf("-X file   read username+password from file\n");
@@ -59,7 +59,8 @@ void help(void)
 int main(int argc, char *argv[])
 {
 	int dev_random_fd = open(DEV_RANDOM, O_RDWR);
-	int max_bits_in_kernel_rng = kernel_rng_get_max_entropy_count();
+	const int max_bits_in_kernel_rng = kernel_rng_get_max_entropy_count();
+	const int write_threshold = kernel_rng_get_write_threshold();
 	int c;
 	bool do_not_fork = false, log_console = false, log_syslog = false;
 	char *log_logfile = NULL;
@@ -75,7 +76,7 @@ int main(int argc, char *argv[])
 		switch(c)
 		{
 			case 'b':
-				interval = atoi(optarg);
+				interval = atof(optarg);
 				if (interval < 1)
 					error_exit("Interval must be > 0");
 				break;
@@ -152,10 +153,9 @@ int main(int argc, char *argv[])
 	{
 		struct timeval tv, *ptv = NULL;
 
-		if (interval > 0)
-		{
-			tv.tv_sec = interval;
-			tv.tv_usec = 0;
+		if (interval > 0) {
+			tv.tv_sec = interval / 1000;
+			tv.tv_usec = int(interval * 1000) % 1000;
 			ptv = &tv;
 		}
 
@@ -169,8 +169,9 @@ int main(int argc, char *argv[])
 		for(;!do_exit;)
 		{
 			int rc = select(dev_random_fd + 1, NULL, &write_fd, NULL, ptv);
-			if (rc > 0) break;
-			if (rc == 0 && interval> 0) break;
+printf("%d\n", rc);
+			if (rc >= 0)
+				break;
 
 			if (errno != EINTR && errno != EAGAIN)
 				error_exit("Select error: %m");
@@ -182,7 +183,7 @@ int main(int argc, char *argv[])
 		int n_bits_in_kernel_rng = kernel_rng_get_entropy_count();
 		dolog(LOG_DEBUG, "kernel rng bit count: %d", n_bits_in_kernel_rng);
 
-		if (FD_ISSET(dev_random_fd, &write_fd) || interval > 0)
+		if (n_bits_in_kernel_rng < write_threshold)
 		{
 			/* find out how many bits to add */
 			int n_bits_to_get = max_bits_in_kernel_rng - n_bits_in_kernel_rng;
