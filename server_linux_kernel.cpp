@@ -67,7 +67,7 @@ int main(int argc, char *argv[])
 	std::vector<std::string> hosts;
 	int log_level = LOG_INFO;
 
-	fprintf(stderr, "%s, (C) 2009-2015 by folkert@vanheusden.com\n", server_type);
+	fprintf(stderr, "%s, (C) 2009-2017 by folkert@vanheusden.com\n", server_type);
 	printf("Please note: this program RETRIEVES entropy data from the kernel and feeds that to the entropybroker!\n");
 	printf("If you want to ADD data to the kernel entropy buffer instead (which is what you most likely want to do), then use eb_client_linux_kernel\n");
 

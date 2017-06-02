@@ -140,7 +140,7 @@ bool http_server::send(unsigned char *p, int len)
 void http_server::send_response(int status_code, std::vector<std::string> *headers, http_bundle *response)
 {
 	headers -> insert(headers -> begin(), format("HTTP/1.0 %d", status_code));
-	headers -> push_back("Expires: Fri, 09 Nov 2015 14:55:30 GMT");
+	headers -> push_back("Expires: Fri, 09 Nov 2017 14:55:30 GMT");
 	headers -> push_back("Cache-Control: no-cache");
 	headers -> push_back("Pragma: no-cache");
 	headers -> push_back(format("Content-Length: %d", response -> get_data_len()));

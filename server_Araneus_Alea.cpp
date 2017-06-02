@@ -79,7 +79,7 @@ int main(int argc, char *argv[])
 	std::vector<std::string> hosts;
 	int log_level = LOG_INFO;
 
-	fprintf(stderr, "eb_server_Araneus_Alea v" VERSION ", (C) 2009-2015 by folkert@vanheusden.com\n");
+	fprintf(stderr, "eb_server_Araneus_Alea v" VERSION ", (C) 2009-2017 by folkert@vanheusden.com\n");
 
 	while((c = getopt(argc, argv, "I:hSX:P:o:L:l:snv")) != -1)
 	{

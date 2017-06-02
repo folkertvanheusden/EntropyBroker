@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 	std::vector<std::string> hosts;
 	int log_level = LOG_INFO;
 
-	printf("eb_client_linux_kernel v" VERSION ", (C) 2009-2015 by folkert@vanheusden.com\n");
+	printf("eb_client_linux_kernel v" VERSION ", (C) 2009-2017 by folkert@vanheusden.com\n");
 
 	while((c = getopt(argc, argv, "b:hX:P:I:L:l:sn")) != -1)
 	{

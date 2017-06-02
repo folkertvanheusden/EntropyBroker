@@ -55,7 +55,7 @@
 #include "web_server.h"
 
 const char *pid_file = PID_DIR "/entropy_broker.pid";
-const char *version = "entropy_broker v " VERSION ", (C) 2009-2015 by folkert@vanheusden.com";
+const char *version = "entropy_broker v " VERSION ", (C) 2009-2017 by folkert@vanheusden.com";
 
 void seed(pools *ppools, pool_crypto *pc)
 {

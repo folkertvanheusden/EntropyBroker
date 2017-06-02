@@ -69,7 +69,7 @@ int main(int argc, char *argv[])
 	std::vector<std::string> hosts;
 	int log_level = LOG_INFO;
 
-	fprintf(stderr, "%s, (C) 2009-2015 by folkert@vanheusden.com\n", server_type);
+	fprintf(stderr, "%s, (C) 2009-2017 by folkert@vanheusden.com\n", server_type);
 
 	while((c = getopt(argc, argv, "S:I:f:hX:P:o:p:d:L:l:sn")) != -1)
 	{
