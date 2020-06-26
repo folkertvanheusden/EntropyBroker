@@ -17,7 +17,7 @@ CXX=g++
 DEBUG= # -pg #-DHELGRIND #-DCRYPTO_DEBUG #-D_DEBUG #-fprofile-arcs -ftest-coverage # -pg
 LINT=-Wshadow -Wall # -W -Wconversion -Wwrite-strings -Wunused
 CXXFLAGS+=-O3 -ggdb -DVERSION=\"${VERSION}\" $(LINT) $(DEBUG) -DCONFIG=\"${ETC}/entropy_broker.conf\" -DCACHE_DIR=\"${CACHE}\" -DPID_DIR=\"${PID}\" -DVAR_DIR=\"${VAR}\" -DWEB_DIR=\"${WEB}\" -DFONT=\"${FONT}\" -rdynamic $(PCSC_CFLAGS)
-LDFLAGS+=$(DEBUG) -lrt -lz -lutil -rdynamic -lcryptopp -pthread
+LDFLAGS+=$(DEBUG) -lrt -lz -lutil -rdynamic -lcrypto++ -pthread
 
 ifeq ($(TFO),yes)
 CXXFLAGS+=-DTCP_TFO

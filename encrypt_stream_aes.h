@@ -1,5 +1,5 @@
-#include <cryptopp/modes.h>
-#include <cryptopp/aes.h>
+#include <crypto++/modes.h>
+#include <crypto++/aes.h>
 
 class encrypt_stream_aes : public encrypt_stream
 {

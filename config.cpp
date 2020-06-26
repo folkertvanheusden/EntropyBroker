@@ -179,7 +179,7 @@ void load_config(const char *config, config_t *pconfig)
 		}
 		else if (strcmp(cmd, "random_source") == 0)
 		{
-			if (strcmp(par, "cryptopp") == 0)
+			if (strcmp(par, "crypto++") == 0)
 				pconfig -> rs = RS_CRYPTOPP;
 			else if (strcmp(par, "dev_random") == 0)
 				pconfig -> rs = RS_DEV_RANDOM;

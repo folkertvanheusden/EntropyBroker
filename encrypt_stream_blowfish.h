@@ -1,5 +1,5 @@
-#include <cryptopp/modes.h>
-#include <cryptopp/blowfish.h>
+#include <crypto++/modes.h>
+#include <crypto++/blowfish.h>
 
 class encrypt_stream_blowfish : public encrypt_stream
 {

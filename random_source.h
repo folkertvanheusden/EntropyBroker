@@ -1,4 +1,4 @@
-#include <cryptopp/osrng.h>
+#include <crypto++/osrng.h>
 
 typedef enum { RS_CRYPTOPP, RS_DEV_URANDOM, RS_DEV_RANDOM } random_source_t;
 

@@ -1,5 +1,5 @@
-#include <cryptopp/modes.h>
-#include <cryptopp/des.h>
+#include <crypto++/modes.h>
+#include <crypto++/des.h>
 
 class encrypt_stream_3des : public encrypt_stream
 {

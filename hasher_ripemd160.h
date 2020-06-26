@@ -1,4 +1,4 @@
-#include <cryptopp/ripemd.h>
+#include <crypto++/ripemd.h>
 
 class hasher_ripemd160: public hasher
 {

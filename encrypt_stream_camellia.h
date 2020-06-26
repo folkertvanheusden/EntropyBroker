@@ -1,5 +1,5 @@
-#include <cryptopp/modes.h>
-#include <cryptopp/camellia.h>
+#include <crypto++/modes.h>
+#include <crypto++/camellia.h>
 
 class encrypt_stream_camellia : public encrypt_stream
 {

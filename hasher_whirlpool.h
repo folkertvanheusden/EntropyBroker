@@ -1,4 +1,4 @@
-#include <cryptopp/whrlpool.h>
+#include <crypto++/whrlpool.h>
 
 class hasher_whirlpool : public hasher
 {

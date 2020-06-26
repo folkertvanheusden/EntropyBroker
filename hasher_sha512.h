@@ -1,4 +1,4 @@
-#include <cryptopp/sha.h>
+#include <crypto++/sha.h>
 
 class hasher_sha512 : public hasher
 {
