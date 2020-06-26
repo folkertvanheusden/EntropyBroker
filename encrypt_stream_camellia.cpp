@@ -39,7 +39,7 @@ bool encrypt_stream_camellia::init(unsigned char *key_in, int key_len, unsigned 
 #endif
 
 	unsigned char temp_key[CryptoPP::Camellia::DEFAULT_KEYLENGTH] = { 0 };
-	memcpy(temp_key, key_in, std::min(CryptoPP::Camellia::DEFAULT_KEYLENGTH, key_len));
+	memcpy(temp_key, key_in, std::min((int)CryptoPP::Camellia::DEFAULT_KEYLENGTH, key_len));
 
 	if (enc)
 		delete enc;

@@ -39,7 +39,7 @@ bool encrypt_stream_aes::init(unsigned char *key_in, int key_len, unsigned char 
 #endif
 
 	unsigned char key_use[CryptoPP::AES::DEFAULT_KEYLENGTH] = { 0 };
-	memcpy(key_use, key_in, std::min(CryptoPP::AES::DEFAULT_KEYLENGTH, key_len));
+	memcpy(key_use, key_in, std::min((int)CryptoPP::AES::DEFAULT_KEYLENGTH, key_len));
 
 	if (enc)
 		delete enc;
