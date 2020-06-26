@@ -1,0 +1,8 @@
+extraction:
+  cpp:
+    prepare:
+      packages:
+        - libcrypto++-dev
+    index:
+      build_command:
+        - make entropy_broker
